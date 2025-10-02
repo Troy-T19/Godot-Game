@@ -1,0 +1,80 @@
+[gd_scene load_steps=10 format=3 uid="uid://7kui3o2j3u20"]
+
+[ext_resource type="Texture2D" uid="uid://yrs3o3wtlytt" path="res://Knight_1.png" id="1_n6xuh"]
+[ext_resource type="Script" uid="uid://dbbm2qj0m8hew" path="res://Scripts/Knight.gd" id="1_o7xh3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3d8pg"]
+atlas = ExtResource("1_n6xuh")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_16lnr"]
+atlas = ExtResource("1_n6xuh")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cuvqk"]
+atlas = ExtResource("1_n6xuh")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k6q8d"]
+atlas = ExtResource("1_n6xuh")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mcy7p"]
+atlas = ExtResource("1_n6xuh")
+region = Rect2(0, 32, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dqqwl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3d8pg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_16lnr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cuvqk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k6q8d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mcy7p")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_duf6b"]
+size = Vector2(15, 16)
+
+[node name="Knight" type="CharacterBody2D"]
+position = Vector2(13, -8)
+collision_layer = 2
+script = ExtResource("1_o7xh3")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+light_mask = 2
+visibility_layer = 13
+sprite_frames = SubResource("SpriteFrames_dqqwl")
+animation = &"Idle"
+autoplay = "Idle"
+frame_progress = 0.97734
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_duf6b")
+
+[node name="Dashing_timer" type="Timer" parent="."]
+wait_time = 0.25
+
+[node name="Dash_again_timer" type="Timer" parent="."]
+wait_time = 3.0
+
+[node name="Wall_jump_limit" type="Timer" parent="."]
+wait_time = 0.5
+
+[connection signal="timeout" from="Dashing_timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="Dash_again_timer" to="." method="_on_dash_again_timer_timeout"]
+[connection signal="timeout" from="Wall_jump_limit" to="." method="_on_wall_jump_limit_timeout"]

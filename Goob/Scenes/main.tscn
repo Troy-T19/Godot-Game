@@ -1,0 +1,28 @@
+[gd_scene load_steps=2 format=3 uid="uid://c7cvt5rpvd5mq"]
+
+[ext_resource type="Script" uid="uid://l30y5dq5h2hy" path="res://Scripts/main.gd" id="1_jjgbg"]
+
+[node name="Main" type="Node2D"]
+position = Vector2(2, -4)
+scale = Vector2(0.83154, 0.98674)
+script = ExtResource("1_jjgbg")
+
+[node name="Play Button" type="Button" parent="."]
+offset_right = 678.0
+offset_bottom = 452.0
+text = "Start"
+
+[node name="Quit Button" type="Button" parent="."]
+offset_left = 702.311
+offset_top = 4.05375
+offset_right = 1380.31
+offset_bottom = 456.054
+text = "Quit"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(692.691, 247.279)
+zoom = Vector2(0.5, 0.5)
+
+[connection signal="pressed" from="Play Button" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="Play Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Quit Button" to="." method="_on_button_2_pressed"]
